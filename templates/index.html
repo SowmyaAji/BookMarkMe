@@ -22,7 +22,7 @@ BookMark -- Welcome
                         {% if new_bookmarks %}
                         <ul>
                         {% for bookmark in new_bookmarks %}
-                        <li>{{ bookmark.user }} added <a href="{{ bookmark.url }}">{{ bookmark.url }}</a></li>
+                        <li>{{ bookmark.user }} added <a href="{{ bookmark.url }}">{{ bookmark.url }}</a> with description {{ bookmark.description }}</li>
                         {% endfor %}
                         </ul>
                         {% else %}
