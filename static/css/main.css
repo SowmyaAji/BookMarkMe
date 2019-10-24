@@ -371,3 +371,12 @@ nav a:hover {
         page-break-after: avoid;
     }
 }
+
+/* flashes styling */
+.flashes {
+    background: blue;
+    color: white;    
+} 
+
+
+

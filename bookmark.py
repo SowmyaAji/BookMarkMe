@@ -1,10 +1,10 @@
 from datetime import datetime
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 
-from logging import DEBUG
 
 app = Flask(__name__)
-app.logger.setLevel(DEBUG)
+
+app.config['SECRET_KEY'] = 'T\x87AD\xf1%\xf1\xe8\xe8\x85\xb6de\xca\xce'
 
 bookmarks = []
 
@@ -24,7 +24,11 @@ class User:
 def store_bookmark(url):
     bookmarks.append(dict(url=url,
                           user=User("Alice", "Wonderland"),
-                          datetime=datetime.utcnow()))
+                          date=datetime.utcnow()))
+
+
+def new_bookmarks(num):
+    return sorted(bookmarks, key=lambda bm: bm['date'], reverse=True)[:num]
 
 
 @app.route('/')
@@ -32,7 +36,7 @@ def store_bookmark(url):
 def index():
     return render_template('index.html', title="Random stuff",
                            text="Waiting to make sense",
-                           user=User("Alice", "Wonderland"))
+                           user=User("Alice", "Wonderland"), new_bookmarks=new_bookmarks(5))
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -40,7 +44,7 @@ def add():
     if request.method == 'POST':
         url = request.form['url']
         store_bookmark(url)
-        app.logger.debug('your stored_url is: ' + url)
+        flash("You have successfully bookmarked '{}'".format(url))
         return redirect(url_for('index'))
     return render_template('add.html')
 
