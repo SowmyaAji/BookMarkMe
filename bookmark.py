@@ -48,7 +48,7 @@ def add():
         url = form.url.data
         description = form.description.data
         store_bookmark(url, description)
-        flash("You have successfully bookmarked {} {}".format(url, description))
+        flash("You have successfully bookmarked {}".format(url))
         return redirect(url_for('index'))
     return render_template('add.html', form=form)
 
