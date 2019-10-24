@@ -9,9 +9,11 @@ BookMark -- Add a URL
     <form action="" method="POST">
     {{ form.hidden_tag() }}
         <table>
-            <tr{% if form.url.errors %} class="error" {% endif %}> 
+            <tr>{% if form.url.errors %} 
+                    {% endif %}
                 <td>Please enter your bookmark here:</td>
                 <td>{{ form.url(size=50)}}
+                 
             </tr>
             <tr class="error">
                 <td> </td>
@@ -22,6 +24,7 @@ BookMark -- Add a URL
                         {% endfor %}
                     </ul>
                 </td>
+               
             </tr>
             <tr>
                 <td>Add an optional description: </td>
